@@ -21,6 +21,15 @@ class Sequence
 
 public:
     class SequenceInvalidArgument;
+    class iterator;
+    typedef const iterator const_iterator;
+
+    iterator begin(){
+        return head ? iterator(head) : nullptr;
+    }
+    const_iterator begin() const {
+        return head ? iterator(head) : nullptr;
+    }
 
     Sequence() noexcept : head(nullptr), length(0)
     {}
@@ -68,3 +77,4 @@ public:
 };
 
 #include "sequence.tpp"
+#include "seq_iterator.tpp"

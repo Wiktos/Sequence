@@ -20,5 +20,6 @@ namespace seq_test{
     void test_accessing_elem_methods();
     void test_contain_method();
     void test_compare_method();
+    void test_iterator_class();
 
 }

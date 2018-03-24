@@ -14,6 +14,7 @@ int main()
     seq_test::test_accessing_elem_methods();
     seq_test::test_contain_method();
     seq_test::test_compare_method();
+    seq_test::test_iterator_class();
 
     seq_test::error_messenger().print_report(std::cout);
     return 0;

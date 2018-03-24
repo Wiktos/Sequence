@@ -286,3 +286,37 @@ void seq_test::test_compare_method(){
     if(compare_res)
         seq_test::error_messenger().report("compare method error");
 }
+
+void seq_test::test_iterator_class(){
+    Sequence<int, int> my_tested;
+    Sequence<int, int>::iterator iter = my_tested.begin();
+    Sequence<int, int>::const_iterator const_iter1 = my_tested.begin();
+
+    //checking begin() return nullptr
+    if(iter != nullptr || const_iter1 != nullptr)
+        seq_test::error_messenger().report("iterator test !nullptr");
+
+    my_tested.push_back(1, 1);
+    //checking begin() return head
+    iter = my_tested.begin();
+    Sequence<int, int>::const_iterator const_iter2 = my_tested.begin();
+
+    if(iter == nullptr || const_iter2 == nullptr)
+        seq_test::error_messenger().report("iterator test =nullptr");
+
+    //checking contain value
+    std::pair<int*, int*> node = *iter;
+    if(*(node.first) != 1 || *(node.second) != 1)
+        seq_test::error_messenger().report("iterator test contain value not equal to proper one");
+
+    *(node.first) = 3;
+     Sequence<int, int>::iterator iter_bis = my_tested.begin();
+    if((*(*iter_bis).first) != 3)
+        seq_test::error_messenger().report("iterator test wrong modification");
+
+    my_tested.push_back(2, 2);
+    iter++;
+    if((*(*iter).first) != 2)
+        seq_test::error_messenger().report("iterator test wrong op++");
+
+}

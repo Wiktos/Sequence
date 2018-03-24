@@ -28,8 +28,18 @@ public:
     }
 
     bool operator==(const Sequence<Key, Info>& rhs) const noexcept;
-    bool operator!=(const Sequence<Key, Info>& rhs) const noexcept { return !(*this == rhs); }
+    bool operator!=(const Sequence<Key, Info>& rhs) const noexcept {
+        return !(*this == rhs);
+    }
+
     Sequence<Key, Info>& operator=(const Sequence<Key, Info>& rhs);
+    Sequence<Key, Info> operator+(const Sequence<Key, Info>& rhs) const{
+        return this->merge(rhs);
+    }
+    Sequence<Key, Info>& operator+=(const Sequence<Key, Info>& rhs){
+        *this = *this + rhs;
+        return *this;
+    }
 
     bool is_empty() const noexcept { return length == 0; }
     std::size_t size() const noexcept { return length; }
@@ -49,22 +59,7 @@ public:
     void clear() noexcept;
 
     Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
-    Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const {
-        Sequence<Key, Info> ret_seq;
-
-        Node *curr = this->head;
-        while(curr){
-            ret_seq.push_back(curr->key, curr->info);
-            curr = curr->next;
-        }
-        curr = seq.head;
-        while(curr){
-            ret_seq.push_back(curr->key, curr->info);
-            curr = curr->next;
-        }
-
-        return ret_seq;
-    }
+    Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const;
 
     ~Sequence() noexcept;
 };

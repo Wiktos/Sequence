@@ -258,10 +258,19 @@ int main()
         for(auto i = 0; i < 3; i++)
             my_tested.push_back(i, i);
 
-        Sequence<int, int> copied(my_tested);
-        Sequence<int, int> merged_seq = my_tested.merge(copied);
 
-        test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq);
+        const Sequence<int, int> copied(my_tested);
+        Sequence<int, int> merged_seq1 = my_tested.merge(copied);
+
+        test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq1);
+
+        Sequence<int, int> merged_seq2 = my_tested + copied;
+        test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq2);
+
+        Sequence<int, int> merged_seq3;
+        merged_seq3 += my_tested;
+        merged_seq3 += copied;
+        test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq3);
     }
 
     error_messenger().print_report(std::cout);

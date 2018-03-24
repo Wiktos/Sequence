@@ -2,7 +2,7 @@
 #include "error_messenger.h"
 #include "sequence.h"
 
-namespace test{
+namespace seq_test{
 
     auto error_messenger = []()->ErrorMessenger&{
         return ErrorMessenger::get_instance();

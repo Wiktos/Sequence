@@ -23,6 +23,11 @@ public:
 
     Sequence() noexcept : head(nullptr), length(0)
     {}
+    Sequence(const Sequence<Key, Info>& source){
+        *this = source;
+    }
+
+    Sequence<Key, Info>& operator=(const Sequence<Key, Info>& rhs);
 
     bool is_empty() const noexcept { return length == 0; }
     std::size_t size() const noexcept { return length; }
@@ -41,7 +46,7 @@ public:
     void remove(const Key& loc, int occurrence = 1);
     void clear() noexcept;
 
-
+    Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
 
     ~Sequence() noexcept;
 };

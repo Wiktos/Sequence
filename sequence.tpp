@@ -14,6 +14,18 @@ public:
 };
 
 template <typename Key, typename Info>
+Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& rhs){
+    clear();
+    Node *curr = rhs.head;
+    while(curr){
+        this->push_back(curr->key, curr->info);
+        curr = curr->next;
+    }
+
+    return *this;
+}
+
+template <typename Key, typename Info>
 void Sequence<Key, Info>::push_front(const Key& key, const Info& info){
         if(is_empty()){
             head = new Node{key, info, nullptr};
@@ -145,6 +157,35 @@ void Sequence<Key, Info>::clear() noexcept{
     }
 
     length = 0;
+}
+
+template <typename Key, typename Info>
+Sequence<Key, Info> Sequence<Key, Info>::subsequence(const Key& loc, int size, int key_occurence) const {
+    if(size < 1 || key_occurence < 1)
+        throw SequenceInvalidArgument("Sequence::subsequence invalid size or key_occurence");
+
+    //finding starting point
+    Node* start = head;
+    int occur_cnt = 0;
+    while(start){
+        if(start->key == loc){
+            occur_cnt++;
+            if(occur_cnt == key_occurence){
+                break;
+            }
+        }
+        start = start->next;
+    }
+
+    Sequence<Key, Info> ret_seq;
+    for(int i = 0; i < size; i++){
+        if(!start)
+            break;
+        ret_seq.push_back(start->key, start->info);
+        start = start->next;
+    }
+
+    return ret_seq;
 }
 
 template <typename Key, typename Info>

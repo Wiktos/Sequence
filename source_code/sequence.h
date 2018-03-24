@@ -18,6 +18,9 @@ class Sequence
         return os;
     }
 
+protected:
+    static unsigned int STANDARD_KEY_OCCURENCE;
+
 public:
     class SequenceInvalidArgument;
 
@@ -44,21 +47,20 @@ public:
     bool is_empty() const noexcept { return length == 0; }
     std::size_t size() const noexcept { return length; }
 
-    //undefined behaviour for emty set
-    /*Info& front() { return head->info; }
-    const Info& front() const { return head->info; }
-    Info& back() { return head->info; }
-    const Info& back() const { return head->info; }*/
+    Info& front();
+    const Info& front() const;
+    Info& back();
+    const Info& back() const;
 
     void push_front(const Key& key, const Info& info);
     void push_back(const Key& key, const Info& info);
-    void insert_after(const Key& loc, const Key& new_key, const Info& new_info, int key_occurence = 1);
+    void insert_after(const Key& loc, const Key& new_key, const Info& new_info, int key_occurence = STANDARD_KEY_OCCURENCE);
     void pop_front() noexcept;
     void pop_back() noexcept;
-    void remove(const Key& loc, int key_occurence = 1);
+    void remove(const Key& loc, int key_occurence = STANDARD_KEY_OCCURENCE);
     void clear() noexcept;
-
-    Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
+    bool contain(const Key& loc, int key_occurence = STANDARD_KEY_OCCURENCE) const;
+    Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = STANDARD_KEY_OCCURENCE) const;
     Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const;
 
     ~Sequence() noexcept;

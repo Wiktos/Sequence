@@ -10,6 +10,30 @@ void seq_test::test_constructors(){
         seq_test::error_messenger().report("size() test constructor error");
 }
 
+void seq_test::test_accessing_elem_methods(){
+    Sequence<int, int> my_tested;
+
+    try{
+        my_tested.front();
+        seq_test::error_messenger().report("back() exception should be thrown");
+    }
+    catch(std::runtime_error& ex){
+    }
+
+    try{
+        my_tested.back();
+        seq_test::error_messenger().report("back() exception should be thrown");
+    }
+    catch(std::runtime_error& ex){
+    }
+
+    my_tested.push_back(1, 1);
+    int head = my_tested.front();
+    int tail = my_tested.back();
+    if(head != tail)
+        seq_test::error_messenger().report("back front wrong output");
+}
+
 void seq_test::test_push_front_and_push_back(){
     Sequence<int, int> my_tested;
     my_tested.push_back(1, 1);
@@ -234,4 +258,20 @@ void seq_test::test_merge_and_binary_op(){
     merged_seq3 += my_tested;
     merged_seq3 += copied;
     test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq3);
+}
+
+void seq_test::test_contain_method(){
+    Sequence<int, int> my_tested;
+    try{
+        my_tested.contain(1, -1);
+        seq_test::error_messenger().report("contain test - exception should be thrown");
+    }
+    catch(Sequence<int, int>::SequenceInvalidArgument& ex){
+    }
+
+    my_tested.push_back(1, 1);
+    if(my_tested.contain(1, 2))
+        seq_test::error_messenger().report("contain test - wrong key_occurence passed");
+    if(!my_tested.contain(1, 1))
+        seq_test::error_messenger().report("contain test - good key_occurence failed");
 }

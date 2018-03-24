@@ -17,5 +17,7 @@ namespace seq_test{
     void test_clear();
     void test_subsequence();
     void test_merge_and_binary_op();
+    void test_accessing_elem_methods();
+    void test_contain_method();
 
 }

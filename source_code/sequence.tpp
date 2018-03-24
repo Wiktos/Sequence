@@ -1,4 +1,7 @@
 template <typename Key, typename Info>
+unsigned int Sequence<Key, Info>::STANDARD_KEY_OCCURENCE = 1;
+
+template <typename Key, typename Info>
 struct Sequence<Key, Info>::Node
 {
     Key key;
@@ -43,6 +46,40 @@ Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& r
     }
 
     return *this;
+}
+
+template <typename Key, typename Info>
+Info& Sequence<Key, Info>::front() {
+    if(is_empty())
+            throw std::runtime_error("Empty sequence");
+    return head->info;
+}
+
+template <typename Key, typename Info>
+const Info& Sequence<Key, Info>::front() const {
+    if(is_empty())
+            throw std::runtime_error("Empty sequence");
+    return head->info;
+}
+
+template <typename Key, typename Info>
+Info& Sequence<Key, Info>::back() {
+    if(is_empty())
+        throw std::runtime_error("Empty sequence");
+    Node *curr = head;
+    while(curr->next)
+        curr = curr->next;
+    return curr->info;
+}
+
+template <typename Key, typename Info>
+const Info& Sequence<Key, Info>::back() const {
+    if(is_empty())
+            throw std::runtime_error("Empty sequence");
+    Node *curr = head;
+    while(curr->next)
+        curr = curr->next;
+    return curr->info;
 }
 
 template <typename Key, typename Info>
@@ -177,6 +214,25 @@ void Sequence<Key, Info>::clear() noexcept{
     }
 
     length = 0;
+}
+
+template <typename Key, typename Info>
+bool Sequence<Key, Info>::contain(const Key& loc, int key_occurence) const{
+    if(key_occurence < 1)
+        throw SequenceInvalidArgument("Sequence::contain wrong key_occurence");
+
+    Node *curr = head;
+    int occur_cnt = 0;
+    while(curr){
+        if(curr->key == loc){
+            occur_cnt++;
+            if(key_occurence == occur_cnt)
+                return true;
+        }
+        curr = curr->next;
+    }
+
+    return false;
 }
 
 template <typename Key, typename Info>

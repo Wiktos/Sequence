@@ -1,4 +1,5 @@
 #include "../test/seq_tests.h"
+#include <list>
 
 int main()
 {
@@ -11,6 +12,8 @@ int main()
     seq_test::test_clear();
     seq_test::test_subsequence();
     seq_test::test_merge_and_binary_op();
+    seq_test::test_accessing_elem_methods();
+    seq_test::test_contain_method();
 
     seq_test::error_messenger().print_report(std::cout);
     return 0;

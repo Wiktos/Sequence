@@ -35,6 +35,10 @@ public:
         return it != rhs.it;
     }
 
+    bool has_next() const noexcept {
+        return it->next ? true : false;
+    }
+
     //undefine behaviour
     iterator operator++(int) const{
         iterator curr(it);

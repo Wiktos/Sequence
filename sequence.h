@@ -39,7 +39,11 @@ public:
     void pop_front() noexcept;
     void pop_back() noexcept;
     void remove(const Key& loc, int occurrence = 1);
+    void clear() noexcept;
 
+
+
+    ~Sequence() noexcept;
 };
 
 #include "sequence.tpp"

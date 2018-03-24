@@ -134,3 +134,20 @@ void Sequence<Key, Info>::remove(const Key& loc, int occurrence){
 
     throw SequenceInvalidArgument("Sequence::remove exception");
 }
+
+template <typename Key, typename Info>
+void Sequence<Key, Info>::clear() noexcept{
+    Node *curr = head;
+    while(curr){
+        head = curr->next;
+        delete curr;
+        curr = head;
+    }
+
+    length = 0;
+}
+
+template <typename Key, typename Info>
+Sequence<Key, Info>::~Sequence() noexcept{
+    clear();
+}

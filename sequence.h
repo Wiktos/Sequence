@@ -52,10 +52,10 @@ public:
 
     void push_front(const Key& key, const Info& info);
     void push_back(const Key& key, const Info& info);
-    void insert_after(const Key& loc, const Key& new_key, const Info& new_info, int occurrence = 1);
+    void insert_after(const Key& loc, const Key& new_key, const Info& new_info, int key_occurence = 1);
     void pop_front() noexcept;
     void pop_back() noexcept;
-    void remove(const Key& loc, int occurrence = 1);
+    void remove(const Key& loc, int key_occurence = 1);
     void clear() noexcept;
 
     Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;

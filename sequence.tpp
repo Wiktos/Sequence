@@ -76,8 +76,8 @@ void Sequence<Key, Info>::push_back(const Key& key, const Info& info){
 }
 
 template <typename Key, typename Info>
-void Sequence<Key, Info>::insert_after(const Key& loc, const Key& new_key, const Info& new_info, int occurrence){
-    if(is_empty() || occurrence < 1)
+void Sequence<Key, Info>::insert_after(const Key& loc, const Key& new_key, const Info& new_info, int key_occurence){
+    if(is_empty() || key_occurence < 1)
         throw SequenceInvalidArgument("Sequence::insert_after exception");
 
     Node *curr = head;
@@ -85,7 +85,7 @@ void Sequence<Key, Info>::insert_after(const Key& loc, const Key& new_key, const
     while(curr){
         if(curr->key == loc){
             occur_cnt++;
-            if(occurrence == occur_cnt){
+            if(key_occurence == occur_cnt){
                 Node *new_elem = new Node{new_key, new_info, curr->next};
                 curr->next = new_elem;
                 return;
@@ -134,15 +134,15 @@ void Sequence<Key, Info>::pop_back() noexcept {
 }
 
 template <typename Key, typename Info>
-void Sequence<Key, Info>::remove(const Key& loc, int occurrence){
-    if(is_empty() || occurrence < 1)
+void Sequence<Key, Info>::remove(const Key& loc, int key_occurence){
+    if(is_empty() || key_occurence < 1)
         throw SequenceInvalidArgument("Sequence::remove exception");
 
     Node *curr = head;
     int occur_cnt = 0;
     if(head->key == loc){
         occur_cnt++;
-        if(occurrence == occur_cnt){
+        if(key_occurence == occur_cnt){
             head = head->next;
             delete curr;
             length--;
@@ -153,7 +153,7 @@ void Sequence<Key, Info>::remove(const Key& loc, int occurrence){
     while(curr->next){
         if(curr->next->key == loc){
             occur_cnt++;
-            if(occurrence == occur_cnt){
+            if(key_occurence == occur_cnt){
                 Node *new_next = curr->next->next;
                 delete curr->next;
                 curr->next = new_next;

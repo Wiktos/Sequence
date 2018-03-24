@@ -21,25 +21,6 @@ class Sequence
 
 public:
     class SequenceInvalidArgument;
-   /* class iterator
-    {
-        Node *it;
-    public:
-        iterator(Node *node) : it(node){
-        }
-
-        Info operator*(){
-            return it->info; }
-    };
-
-    typedef const iterator const_iterator;
-
-    iterator begin(){
-        return iterator(head);
-    }
-    const_iterator begin() const {
-        return iterator(head);
-    }*/
 
     Sequence() noexcept : head(nullptr), length(0)
     {}

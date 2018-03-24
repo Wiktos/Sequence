@@ -1,6 +1,6 @@
 #include <sstream>
 #include "error_messenger.h"
-#include "../source_code/sequence.h"
+#include "../templates/sequence.h"
 
 namespace seq_test{
 
@@ -19,5 +19,6 @@ namespace seq_test{
     void test_merge_and_binary_op();
     void test_accessing_elem_methods();
     void test_contain_method();
+    void test_compare_method();
 
 }

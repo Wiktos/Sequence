@@ -1,7 +1,4 @@
 template <typename Key, typename Info>
-unsigned int Sequence<Key, Info>::STANDARD_KEY_OCCURENCE = 1;
-
-template <typename Key, typename Info>
 struct Sequence<Key, Info>::Node
 {
     Key key;

@@ -275,3 +275,14 @@ void seq_test::test_contain_method(){
     if(!my_tested.contain(1, 1))
         seq_test::error_messenger().report("contain test - good key_occurence failed");
 }
+
+void seq_test::test_compare_method(){
+    Sequence<int, int> first;
+    Sequence<int, int> second;
+    bool compare_res = first.compare(second, [](const Sequence<int, int> first, const Sequence<int, int> second) ->bool{
+                        return first.size() > second.size();
+                     });
+
+    if(compare_res)
+        seq_test::error_messenger().report("compare method error");
+}

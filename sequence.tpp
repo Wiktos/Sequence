@@ -14,7 +14,27 @@ public:
 };
 
 template <typename Key, typename Info>
+bool Sequence<Key, Info>::operator==(const Sequence<Key, Info>& rhs) const noexcept {
+    if(size() != rhs.size())
+        return false;
+
+    Node *left = head;
+    Node *right = rhs.head;
+    while(left){
+        if(left != right)
+            return false;
+        left = left->next;
+        right = right->next;
+    }
+
+    return true;
+}
+
+template <typename Key, typename Info>
 Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& rhs){
+    if(*this == rhs)
+        return *this;
+
     clear();
     Node *curr = rhs.head;
     while(curr){
@@ -151,7 +171,7 @@ template <typename Key, typename Info>
 void Sequence<Key, Info>::clear() noexcept{
     Node *curr = head;
     while(curr){
-        head = curr->next;
+        head = head->next;
         delete curr;
         curr = head;
     }

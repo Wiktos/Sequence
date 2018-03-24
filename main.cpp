@@ -244,6 +244,26 @@ int main()
         test_seq_output_stream("1 1\n2 2\n", sub_sequence);
     }
 
+    {//test merge method
+        Sequence<int, int> my_tested;
+
+        auto test_seq_output_stream = [&](const std::string& proper_output, const Sequence<int, int>& seq)->void{
+            stringstream expected_output(proper_output);
+            stringstream output_received;
+            output_received << seq;
+            if(output_received.str() != expected_output.str())
+            error_messenger().report("merge() test error - wrong stream output");
+        };
+
+        for(auto i = 0; i < 3; i++)
+            my_tested.push_back(i, i);
+
+        Sequence<int, int> copied(my_tested);
+        Sequence<int, int> merged_seq = my_tested.merge(copied);
+
+        test_seq_output_stream("0 0\n1 1\n2 2\n0 0\n1 1\n2 2\n", merged_seq);
+    }
+
     error_messenger().print_report(std::cout);
     return 0;
 }

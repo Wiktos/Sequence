@@ -23,10 +23,12 @@ public:
 
     Sequence() noexcept : head(nullptr), length(0)
     {}
-    Sequence(const Sequence<Key, Info>& source){
+    Sequence(const Sequence<Key, Info>& source) : head(nullptr){
         *this = source;
     }
 
+    bool operator==(const Sequence<Key, Info>& rhs) const noexcept;
+    bool operator!=(const Sequence<Key, Info>& rhs) const noexcept { return !(*this == rhs); }
     Sequence<Key, Info>& operator=(const Sequence<Key, Info>& rhs);
 
     bool is_empty() const noexcept { return length == 0; }
@@ -47,6 +49,22 @@ public:
     void clear() noexcept;
 
     Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
+    Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const {
+        Sequence<Key, Info> ret_seq;
+
+        Node *curr = this->head;
+        while(curr){
+            ret_seq.push_back(curr->key, curr->info);
+            curr = curr->next;
+        }
+        curr = seq.head;
+        while(curr){
+            ret_seq.push_back(curr->key, curr->info);
+            curr = curr->next;
+        }
+
+        return ret_seq;
+    }
 
     ~Sequence() noexcept;
 };

@@ -305,18 +305,18 @@ void seq_test::test_iterator_class(){
         seq_test::error_messenger().report("iterator test =nullptr");
 
     //checking contain value
-    std::pair<int*, int*> node = *iter;
-    if(*(node.first) != 1 || *(node.second) != 1)
+    Sequence<int, int>::iterator::NodeView node = *iter;
+    if(node.key != 1 || node.info != 1)
         seq_test::error_messenger().report("iterator test contain value not equal to proper one");
 
-    *(node.first) = 3;
-     Sequence<int, int>::iterator iter_bis = my_tested.begin();
-    if((*(*iter_bis).first) != 3)
+    node.key = 3;
+    Sequence<int, int>::iterator iter_bis = my_tested.begin();
+    if((*iter_bis).key != 3)
         seq_test::error_messenger().report("iterator test wrong modification");
 
     my_tested.push_back(2, 2);
     iter++;
-    if((*(*iter).first) != 2)
+    if((*iter).key != 2)
         seq_test::error_messenger().report("iterator test wrong op++");
 
 }

@@ -8,41 +8,23 @@ Sequence<Key, Info> shuffle(const Sequence<Key, Info>& s1, int start1, int len1,
 {
     Sequence<Key, Info> retv;
 
-    if(repeat == 0)
+    if(repeat <= 0)
         return retv;
 
     //getting value from first list
-    typename Sequence<Key, Info>::const_iterator first_iter = s1.begin();
-
-    for(int i = 0; i <= start1; i++){
-        if(!first_iter.has_next())
-            break;
-        first_iter++;
-    }
-
-    for(int i = 0; i < len1; i++){
-        if(!first_iter.has_next())
-            break;
-        std::pair<Key, Info> node = *first_iter;
-        retv.push_back(node.first, node.second);
-        first_iter++;
+    if(static_cast<unsigned int>(start1 + len1) <= s1.size())
+        retv += s1.subsequence(s1.begin() + start1, s1.begin() + (start1 + len1));
+    else{
+        if(static_cast<unsigned int>(start1) < s1.size())
+            retv += s1.subsequence(s1.begin() + start1, s1.begin() + s1.size());
     }
 
     //getting value from second list
-    typename Sequence<Key, Info>::const_iterator sec_iter = s2.begin();
-
-    for(int i = 0; i <= start2; i++){
-        if(!sec_iter.has_next())
-            break;
-        sec_iter++;
-    }
-
-    for(int i = 0; i < len2; i++){
-        if(!sec_iter.has_next())
-            break;
-        std::pair<Key, Info> node = *sec_iter;
-        retv.push_back(node.first, node.second);
-        sec_iter++;
+    if(static_cast<unsigned int>(start2 + len2) <= s2.size())
+        retv += s1.subsequence(s2.begin() + start2, s2.begin() + (start2 + len2));
+    else{
+        if(static_cast<unsigned int>(start2) < s2.size())
+            retv += s1.subsequence(s2.begin() + start2, s2.begin() + s2.size());
     }
 
     return retv + shuffle(s1, start1 + len1, len1,

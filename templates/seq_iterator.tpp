@@ -3,6 +3,11 @@ class Sequence<Key, Info>::iterator
 {
     mutable Node *it;
 public:
+    struct NodeView{
+        Key& key;
+        Info& info;
+    };
+
     iterator(Node *node) : it(node){
     }
 
@@ -11,21 +16,23 @@ public:
         return *this;
     }
 
-    std::pair<Key*, Info*> operator*() noexcept{
-        return std::make_pair(&(it->key), &(it->info));
+    NodeView operator*() noexcept{
+        NodeView retv{it->key, it->info};
+        return retv;
     }
-    std::pair<Key, Info> operator*() const noexcept{
-        return std::make_pair(it->key, it->info);
-    }
-
-    std::pair<Key*, Info*>* operator->(){
-        std::pair<Key*, Info*> retv = *this;
-        return std::move(retv);
+    const NodeView operator*() const noexcept{
+        const NodeView retv{it->key, it->info};
+        return retv;
     }
 
-    std::pair<Key, Info>* operator->() const{
-        std::pair<Key, Info> retv = *this;
-        return std::move(retv);
+    NodeView* operator->(){
+        NodeView retv{it->key, it->info};
+        return &retv;
+    }
+
+    const NodeView* operator->() const{
+        NodeView retv{it->key, it->info};
+        return &retv;
     }
 
     bool operator==(iterator rhs) const noexcept{

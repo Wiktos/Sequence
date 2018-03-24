@@ -262,6 +262,20 @@ Sequence<Key, Info> Sequence<Key, Info>::subsequence(const Key& loc, int size, i
 }
 
 template <typename Key, typename Info>
+Sequence<Key, Info> Sequence<Key, Info>::subsequence(const_iterator begin, const_iterator end) const{
+    Sequence<Key, Info> retv;
+
+    while(begin != end){
+        const typename iterator::NodeView node = *begin;
+        retv.push_back(node.key, node.info);
+        if(!begin.has_next())
+            break;
+        begin++;
+    }
+    return retv;
+}
+
+template <typename Key, typename Info>
 Sequence<Key, Info> Sequence<Key, Info>::merge(const Sequence<Key, Info> seq) const {
     Sequence<Key, Info> ret_seq;
 

@@ -71,6 +71,7 @@ public:
     void clear() noexcept;
     bool contain(const Key& loc, int key_occurence = 1) const;
     Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
+    Sequence<Key, Info> subsequence(const_iterator begin, const_iterator end) const;
     Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const;
 
     ~Sequence() noexcept;

@@ -6,22 +6,18 @@
 template <typename Key, typename Info>
 class Sequence
 {
+    //private member types
     struct Node;
     Node *head;
     std::size_t length;
 
-    friend std::ostream& operator<<(std::ostream& os, const Sequence<Key, Info>& seq){
-        Node *curr = seq.head;
-        while(curr){
-            os << curr->key << ' ' << curr->info << '\n';
-            curr = curr->next;
-        }
-        return os;
-    }
+    //output stream operator
+    template <typename K, typename I>
+    friend std::ostream& operator<<(std::ostream& os, const Sequence<K, I>& seq);
 
 public:
+    //public member types
     class SequenceInvalidArgument;
-
     class iterator;
     typedef const iterator const_iterator;
 

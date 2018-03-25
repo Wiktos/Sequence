@@ -1,4 +1,14 @@
 template <typename Key, typename Info>
+std::ostream& operator<<(std::ostream& os, const Sequence<Key, Info>& seq){
+    typename Sequence<Key, Info>::Node *curr = seq.head;
+    while(curr){
+        os << curr->key << ' ' << curr->info << '\n';
+        curr = curr->next;
+    }
+    return os;
+}
+
+template <typename Key, typename Info>
 struct Sequence<Key, Info>::Node
 {
     Key key;

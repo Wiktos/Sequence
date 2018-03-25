@@ -48,18 +48,17 @@ public:
         return it->next ? true : false;
     }
 
-    //undefine behaviour
     iterator operator++(int) const{
         iterator curr(it);
         it = it->next;
         return curr;
     }
-    //undefine behaviour
+
     iterator operator++() const{
         it = it->next;
         return *this;
     }
-    //undefine behaviour
+
     iterator operator+(int rhs) const{
         for(int i = 0; i < rhs; i++)
             it = it->next;

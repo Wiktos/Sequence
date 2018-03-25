@@ -320,3 +320,16 @@ void seq_test::test_iterator_class(){
         seq_test::error_messenger().report("iterator test wrong op++");
 
 }
+
+void seq_test::test_swap_method(){
+    Sequence<int, int> my_tested;
+    for(int i = 0; i < 10 ; i++)
+        my_tested.push_front(i, i);
+    Sequence<int, int> second;
+
+    my_tested.swap(second);
+    if(!my_tested.is_empty())
+        seq_test::error_messenger().report("test swap method - my_tested should be empty");
+    if(second.is_empty())
+        seq_test::error_messenger().report("test swap method - second should not be empty");
+}

@@ -21,5 +21,6 @@ namespace seq_test{
     void test_contain_method();
     void test_compare_method();
     void test_iterator_class();
+    void test_swap_method();
 
 }

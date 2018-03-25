@@ -16,6 +16,7 @@ int main()
     seq_test::test_contain_method();
     seq_test::test_compare_method();
     seq_test::test_iterator_class();
+    seq_test::test_swap_method();
 
     Sequence<int, int> s1;
     for(int i = 1; i < 9; i++)

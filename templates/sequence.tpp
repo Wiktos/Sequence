@@ -46,6 +46,12 @@ Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& r
 }
 
 template <typename Key, typename Info>
+Sequence<Key, Info>& Sequence<Key, Info>::operator=(Sequence<Key, Info>&& rhs){
+    *this = rhs;
+    return *this;
+};
+
+template <typename Key, typename Info>
 Info& Sequence<Key, Info>::front() {
     if(is_empty())
             throw std::runtime_error("Empty sequence");
@@ -291,6 +297,13 @@ Sequence<Key, Info> Sequence<Key, Info>::merge(const Sequence<Key, Info> seq) co
     }
 
     return ret_seq;
+}
+
+template <typename Key, typename Info>
+void Sequence<Key, Info>::swap(Sequence<Key, Info>& seq){
+    Sequence<Key, Info> temp(*this);
+    *this = seq;
+    seq = temp;
 }
 
 template <typename Key, typename Info>

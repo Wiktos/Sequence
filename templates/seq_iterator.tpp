@@ -2,6 +2,7 @@ template <typename Key, typename Info>
 class Sequence<Key, Info>::iterator
 {
     mutable Node *it;
+
 public:
     struct NodeView
     {

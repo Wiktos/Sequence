@@ -3,7 +3,8 @@ class Sequence<Key, Info>::iterator
 {
     mutable Node *it;
 public:
-    struct NodeView{
+    struct NodeView
+    {
         Key& key;
         Info& info;
     };
@@ -21,7 +22,7 @@ public:
         return retv;
     }
     const NodeView operator*() const noexcept{
-        const NodeView retv{it->key, it->info};
+        NodeView retv{it->key, it->info};
         return retv;
     }
 

@@ -1,5 +1,5 @@
 #include "../test/seq_tests.h"
-#include "../templates/shuffle.h"
+#include "../test/shuffle_tests.h"
 
 int main()
 {
@@ -18,16 +18,8 @@ int main()
     seq_test::test_iterator_class();
     seq_test::test_swap_method();
 
-    Sequence<int, int> s1;
-    for(int i = 1; i < 9; i++)
-        s1.push_back(i, i);
-
-    Sequence<int, int> s2;
-    for(int i = 1; i < 13; i++)
-        s2.push_back(i * 10, i * 10);
-
-    Sequence<int, int> s3 = shuffle(s1, 0, 1, s2, 2, 1, 10);
-    std::cout << s3 << '\n';
+    shuffle_test::test_check_param_method();
+    shuffle_test::test_shuffle_method();
 
     seq_test::error_messenger().print_report(std::cout);
     return 0;

@@ -1,4 +1,6 @@
+#pragma once
 #include <sstream>
+
 #include "error_messenger.h"
 #include "../templates/sequence.h"
 

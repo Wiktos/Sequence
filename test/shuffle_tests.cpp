@@ -13,6 +13,13 @@ void shuffle_test::test_check_param_method(){
        seq_test::error_messenger().report("test check shuffle argument - correct test");
     if(!check_shuffle_argument(12, 321, 12, 8765))
        seq_test::error_messenger().report("test check shuffle argument - correct test");
+
+    if(check_shuffle_argument(-1, 1, 1, 1))
+       seq_test::error_messenger().report("test check shuffle argument - incorrect test");
+    if(check_shuffle_argument(0, -3, 0, 0))
+       seq_test::error_messenger().report("test check shuffle argument - incorrect test");
+    if(check_shuffle_argument(12, 321, -2, -8765))
+       seq_test::error_messenger().report("test check shuffle argument - incorrect test");
 }
 
 void shuffle_test::test_shuffle_method(){

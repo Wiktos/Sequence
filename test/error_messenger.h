@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 
-
 namespace seq_test{
     class ErrorMessenger
     {
@@ -16,7 +15,6 @@ namespace seq_test{
         ErrorMessenger& operator=(const ErrorMessenger& rhs) = delete;
 
     public:
-
         static ErrorMessenger& get_instance(){
             static ErrorMessenger instance;
             return instance;

@@ -10,7 +10,7 @@ class Sequence
     Node *head;
     std::size_t length;
 
-    //output stream operator
+    //non-member function output stream operator
     template <typename K, typename I>
     friend std::ostream& operator<<(std::ostream& os, const Sequence<K, I>& seq);
 
@@ -40,16 +40,10 @@ public:
         *this = *this + rhs;
         return *this;
     }
-
-    //compare operations
     bool operator==(const Sequence<Key, Info>& rhs) const noexcept;
     bool operator!=(const Sequence<Key, Info>& rhs) const noexcept {
         return !(*this == rhs);
     }
-    bool compare(const Sequence<Key, Info>& rhs, std::function<bool(const Sequence<Key, Info>&, const Sequence<Key, Info>&)> comparator){
-        return comparator(*this, rhs);
-    }
-    bool contain(const Key& loc, int key_occurence = 1) const;
 
     //element access
     Info& front();
@@ -58,10 +52,10 @@ public:
     const Info& back() const;
 
     //iterators
-    iterator begin(){
+    iterator begin() noexcept{
         return head ? iterator(head) : nullptr;
     }
-    const_iterator begin() const {
+    const_iterator begin() const noexcept{
         return head ? iterator(head) : nullptr;
     }
 
@@ -83,6 +77,10 @@ public:
     Sequence<Key, Info> subsequence(const Key& loc, int size, int key_occurence = 1) const;
     Sequence<Key, Info> subsequence(const_iterator begin, const_iterator end) const;
     Sequence<Key, Info> merge(const Sequence<Key, Info> seq) const;
+    bool compare(const Sequence<Key, Info>& rhs, std::function<bool(const Sequence<Key, Info>&, const Sequence<Key, Info>&)> comparator){
+        return comparator(*this, rhs);
+    }
+    bool contain(const Key& loc, int key_occurence = 1) const;
 
     ~Sequence() noexcept;
 };

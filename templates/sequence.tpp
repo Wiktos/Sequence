@@ -24,7 +24,7 @@ public:
 };
 
 template <typename Key, typename Info>
-bool Sequence<Key, Info>::operator==(const Sequence<Key, Info>& rhs) const noexcept {
+bool Sequence<Key, Info>::operator==(const Sequence<Key, Info>& rhs) const noexcept{
     if(size() != rhs.size())
         return false;
 

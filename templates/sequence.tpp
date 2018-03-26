@@ -42,7 +42,7 @@ bool Sequence<Key, Info>::operator==(const Sequence<Key, Info>& rhs) const noexc
 
 template <typename Key, typename Info>
 Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& rhs){
-    if(*this == rhs)
+    if(this == &rhs)
         return *this;
 
     clear();
@@ -57,10 +57,15 @@ Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& r
 
 template <typename Key, typename Info>
 Sequence<Key, Info>& Sequence<Key, Info>::operator=(Sequence<Key, Info>&& rhs) noexcept{
+    if(this == &rhs)
+        return *this;
+
     clear();
     head = std::move(rhs.head);
+    length = std::move(rhs.length);
     rhs.head = nullptr;
     rhs.length = 0;
+
     return *this;
 }
 

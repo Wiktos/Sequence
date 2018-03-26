@@ -35,6 +35,7 @@ void shuffle_test::test_shuffle_method(){
     std::stringstream expected("1 1\n30 30\n2 2\n40 40\n3 3\n50 50\n");
     std::stringstream output;
     output << s3;
+
     if(output.str() != expected.str())
         seq_test::error_messenger().report("test shuffle method failed");
 }

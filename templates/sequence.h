@@ -1,6 +1,7 @@
 #pragma once
 #include <stdexcept>
 #include <functional>
+#include <utility>
 
 template <typename Key, typename Info>
 class Sequence
@@ -26,7 +27,7 @@ public:
     Sequence(const Sequence<Key, Info>& source) : head(nullptr){
         *this = source;
     }
-    Sequence(Sequence<Key, Info>&& source) noexcept : head(std::move(source.head)) {
+    Sequence(Sequence<Key, Info>&& source) noexcept : head(std::move(source.head)), length(std::move(source.length)) {
        source.head = nullptr;
        source.length = 0;
     };

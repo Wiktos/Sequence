@@ -56,10 +56,13 @@ Sequence<Key, Info>& Sequence<Key, Info>::operator=(const Sequence<Key, Info>& r
 }
 
 template <typename Key, typename Info>
-Sequence<Key, Info>& Sequence<Key, Info>::operator=(Sequence<Key, Info>&& rhs){
-    *this = rhs;
+Sequence<Key, Info>& Sequence<Key, Info>::operator=(Sequence<Key, Info>&& rhs) noexcept{
+    clear();
+    head = std::move(rhs.head);
+    rhs.head = nullptr;
+    rhs.length = 0;
     return *this;
-};
+}
 
 template <typename Key, typename Info>
 Info& Sequence<Key, Info>::front() {

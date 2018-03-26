@@ -301,14 +301,9 @@ Sequence<Key, Info> Sequence<Key, Info>::subsequence(const_iterator begin, const
 
 template <typename Key, typename Info>
 Sequence<Key, Info> Sequence<Key, Info>::merge(const Sequence<Key, Info> seq) const {
-    Sequence<Key, Info> ret_seq;
+    Sequence<Key, Info> ret_seq(*this);
 
-    Node *curr = this->head;
-    while(curr){
-        ret_seq.push_back(curr->key, curr->info);
-        curr = curr->next;
-    }
-    curr = seq.head;
+    Node *curr = seq.head;
     while(curr){
         ret_seq.push_back(curr->key, curr->info);
         curr = curr->next;

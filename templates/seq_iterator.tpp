@@ -28,12 +28,12 @@ public:
     }
 
     NodeView* operator->(){
-        NodeView retv{it->key, it->info};
-        return &retv;
+        std::unique_ptr<NodeView> retv(new NodeView{it->key, it->info});
+        return retv.get();
     }
 
     const NodeView* operator->() const{
-        NodeView retv{it->key, it->info};
+        std::unique_ptr<NodeView> retv(new NodeView{it->key, it->info});
         return &retv;
     }
 

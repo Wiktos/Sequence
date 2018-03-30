@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <functional>
 #include <utility>
+#include <memory>
 
 template <typename Key, typename Info>
 class Sequence
@@ -30,7 +31,7 @@ public:
     Sequence(Sequence<Key, Info>&& source) noexcept : head(std::move(source.head)), length(std::move(source.length)) {
        source.head = nullptr;
        source.length = 0;
-    };
+    }
 
     //operators
     Sequence<Key, Info>& operator=(const Sequence<Key, Info>& rhs);

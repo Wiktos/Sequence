@@ -31,7 +31,7 @@ bool Sequence<Key, Info>::operator==(const Sequence<Key, Info>& rhs) const noexc
     Node *left = head;
     Node *right = rhs.head;
     while(left){
-        if(left != right)
+        if(left->key != right->key || left->info != right->info)
             return false;
         left = left->next;
         right = right->next;
